@@ -1,0 +1,8 @@
+{
+  "name": "Typescript-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/bachtuyetx7chulun/Typescript.git",
+  "author": "bachtuyetx7chulun <contact.truongtrunghieu@gmail.com>",
+  "license": "MIT"
+}
