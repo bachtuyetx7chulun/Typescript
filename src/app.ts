@@ -2,6 +2,7 @@ import express, { Application } from 'express'
 import morgan from 'morgan'
 import { PORT } from './configs'
 import { GetError, HandleError } from './middleware/error.middleware'
+import { speedLimiter, limiter } from './middleware/limit.middleware'
 import apiRouter from './routers'
 import bodyParser from 'body-parser'
 
@@ -23,6 +24,8 @@ export class App {
     this.app.use(bodyParser.urlencoded({ extended: false }))
     this.app.set('port', this.port || PORT || 5000)
     this.app.use(morgan('dev'))
+    this.app.use(speedLimiter)
+    this.app.use(limiter)
   }
 
   private handleError(): void {
