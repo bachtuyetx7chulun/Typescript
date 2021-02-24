@@ -1,8 +1,9 @@
 import express, { Application } from 'express'
 import morgan from 'morgan'
 import { PORT } from './configs'
-import { GetError, HandleError } from './middleware'
+import { GetError, HandleError } from './middleware/error.middleware'
 import apiRouter from './routers'
+import bodyParser from 'body-parser'
 
 export class App {
   private app: Application
@@ -14,10 +15,12 @@ export class App {
   }
 
   private api(): void {
-    this.app.use('/', apiRouter)
+    this.app.use('/api/v1', apiRouter)
   }
 
   private configure(): void {
+    this.app.use(bodyParser.json())
+    this.app.use(bodyParser.urlencoded({ extended: false }))
     this.app.set('port', this.port || PORT || 5000)
     this.app.use(morgan('dev'))
   }

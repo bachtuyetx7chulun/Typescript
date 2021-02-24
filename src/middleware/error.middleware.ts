@@ -1,13 +1,18 @@
-import express, { Request, Response, NextFunction } from 'express'
+import { NextFunction, Request, Response } from 'express'
 
 interface ResponseError extends Error {
   status?: number
 }
 
-const GetError = (req: Request, res: Response, next: NextFunction): void => {
+const GetError = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Response => {
   let error = new Error('Not found') as ResponseError
   error.status = 404
   next(error)
+  return
 }
 
 const HandleError = (
@@ -15,9 +20,9 @@ const HandleError = (
   req: Request,
   res: Response,
   next: NextFunction
-): void => {
+): Response => {
   const httpCode = err.status || 500
-  res.status(httpCode).json({
+  return res.status(httpCode).json({
     error: {
       status: httpCode,
       message: err.message || 'Internal Server Error',
@@ -26,3 +31,4 @@ const HandleError = (
 }
 
 export { GetError, HandleError }
+
