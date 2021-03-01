@@ -11,6 +11,9 @@ import {
   ForeignKey,
   BelongsTo,
   Unique,
+  CreatedAt,
+  UpdatedAt,
+  DeletedAt,
 } from 'sequelize-typescript'
 import User from './user.model'
 
@@ -43,14 +46,17 @@ export default class Project extends Model implements IProject {
   @Column(DataType.INTEGER)
   completeTime: number
 
+  @CreatedAt
   @AllowNull(false)
   @Column(DataType.DATE)
   createdAt: Date
 
+  @UpdatedAt
   @AllowNull(false)
   @Column(DataType.DATE)
   updatedAt: Date
 
+  @DeletedAt
   @AllowNull(true)
   @Column(DataType.DATE)
   deletedAt: Date

@@ -54,18 +54,18 @@ export default class User extends Model implements IUser {
   @AllowNull(false)
   @NotEmpty
   @Column(DataType.DATE)
-  createdAt!: string
+  createdAt!: Date
 
   @UpdatedAt
   @AllowNull(false)
   @NotEmpty
   @Column(DataType.DATE)
-  updatedAt!: string
+  updatedAt!: Date
 
   @DeletedAt
-  @AllowNull(false)
+  @AllowNull(true)
   @Column(DataType.DATE)
-  deletedAt: string
+  deletedAt?: Date
 
   @HasMany(() => Project, 'projectContribute')
   projects: Project[]
